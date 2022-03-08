@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.4)
+project(formatter)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_library(formatter STATIC /home/mat03/Arthur-Kitsuragi/workspace/projects/lab03/formatter_lib/formatter.cpp)
+include_directories(/home/mat03/Arthur-Kitsuragi/workspace/projects/lab03/formatter_lib)
+target_link_libraries(example1 print)
