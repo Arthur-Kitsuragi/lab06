@@ -4,6 +4,16 @@ on:
     branches:
       - master
 jobs:
+  work0:
+      runs-on: windows-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Compile-0
+          run: |
+            cd solver_application
+            cmake . -Dmake_bin=ON
+            make
+            cpack -G WIX
   work1:
       runs-on: macos-latest
       steps:
@@ -13,7 +23,6 @@ jobs:
             cd solver_application
             cmake . -Dmake_bin=ON
             make
-            cpack -G WIX
             cpack -G DragNDrop
         
   work:
