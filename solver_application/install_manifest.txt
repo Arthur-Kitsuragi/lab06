@@ -1,4 +1,0 @@
-/home/mat03/Arthur-Kitsuragi/workspace/projects/lab06_1/solver_application/_CPack_Packages/Linux/TGZ/just_code/src/equation.cpp
-/home/mat03/Arthur-Kitsuragi/workspace/projects/lab06_1/solver_application/_CPack_Packages/Linux/TGZ/just_code/src/libformatter_ex.a
-/home/mat03/Arthur-Kitsuragi/workspace/projects/lab06_1/solver_application/_CPack_Packages/Linux/TGZ/just_code/src/libformatter.a
-/home/mat03/Arthur-Kitsuragi/workspace/projects/lab06_1/solver_application/_CPack_Packages/Linux/TGZ/just_code/src/libsolverlib.a
