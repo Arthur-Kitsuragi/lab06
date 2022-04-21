@@ -12,8 +12,8 @@ jobs:
           run: |
             cd solver_application
             cmake . -Dmake_bin=ON
-            cmake --build .
-            cpack -G WIX
+            cmake --build . --config Release
+            cpack -G WIX Release
   work1:
       runs-on: macos-latest
       steps:
