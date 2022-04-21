@@ -3,6 +3,6 @@
 #include "formatter_ex.h"
 
 int main()
-{//dddffdd
+{//dddffddff
     formatter(std::cout, "hello, world!");
 }
