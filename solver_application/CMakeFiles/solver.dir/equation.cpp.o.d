@@ -1,5 +1,5 @@
 CMakeFiles/solver.dir/equation.cpp.o: \
- /home/mat03/Arthur-Kitsuragi/workspace/projects/lab03/solver_application/equation.cpp \
+ /home/mat03/Arthur-Kitsuragi/workspace/projects/lab06_1/solver_application/equation.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/9/iostream \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
@@ -136,5 +136,5 @@ CMakeFiles/solver.dir/equation.cpp.o: \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
  /usr/include/c++/9/bits/istream.tcc \
- /home/mat03/Arthur-Kitsuragi/workspace/projects/lab03/formatter_ex_lib/formatter_ex.h \
- /home/mat03/Arthur-Kitsuragi/workspace/projects/lab03/solver_lib/solver.h
+ /home/mat03/Arthur-Kitsuragi/workspace/projects/lab06_1/solver_application/../formatter_ex_lib/formatter_ex.h \
+ /home/mat03/Arthur-Kitsuragi/workspace/projects/lab06_1/solver_application/../solver_lib/solver.h
