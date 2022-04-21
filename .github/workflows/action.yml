@@ -25,5 +25,6 @@ jobs:
             Changes in this Release
             - First Change
             - Second Change
+          avatar_url: https://github.com/images/error/octocat_happy.gif
           draft: false
           prerelease: false
