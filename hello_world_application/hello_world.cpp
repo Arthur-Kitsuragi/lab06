@@ -3,6 +3,6 @@
 #include "formatter_ex.h"
 
 int main()
-{//for commitff
+{//fo
     formatter(std::cout, "hello, world!");
 }
