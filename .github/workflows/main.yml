@@ -1,0 +1,39 @@
+name: lab05
+on:
+  push:
+    branches:
+      - master
+jobs:
+  work1:
+      runs-on: osx
+      steps:
+        - name: Compile-1
+          run: |
+            cd solver_application
+            cmake . -Dmake_bin=ON
+            make
+            cpack -G WIX
+            cpack -G DragNDrop
+        
+  work:
+      runs-on: ubuntu-latest 
+      steps:
+        - uses: actions/checkout@v2
+        - name: Download
+          run: sudo apt install g++ cmake rpm
+        - name: Compile-1
+          run: |
+            cd solver_application
+            cmake . -Dmake_bin=ON
+            make
+            cpack -G DEB
+            cpack -G RPM
+        - name: Compile-2
+          run: |
+            cd solver_application
+            cmake . -Dmake_bin=OFF
+            make
+            cpack -G ZIP
+            cpack -G TGZ
+
+        
