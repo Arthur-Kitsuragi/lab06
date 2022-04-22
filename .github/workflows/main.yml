@@ -14,7 +14,8 @@ jobs:
             cmake . -Dmake_bin=ON
             cmake --build . --config Release
             cpack -G WIX Release
-            mv D:/a/lab06/lab06/solver_application/wixxx.msi art
+        - name: move
+          run: mv D:/a/lab06/lab06/solver_application/wixxx.msi art
   work1:
       runs-on: macos-latest
       steps:
@@ -25,7 +26,8 @@ jobs:
             cmake . -Dmake_bin=ON
             make
             cpack -G DragNDrop
-            mv /Users/runner/work/lab06/lab06/solver_application/wixxx.dmg art
+        - name: move
+          run: mv /Users/runner/work/lab06/lab06/solver_application/wixxx.dmg art
         
   work:
       runs-on: ubuntu-latest 
@@ -40,6 +42,8 @@ jobs:
             make
             cpack -G DEB
             cpack -G RPM
+        - name: move
+          run: |
             mv /home/runner/work/lab06/lab06/solver_application/solvering.rpm art
             mv /home/runner/work/lab06/lab06/solver_application/solvering.deb art
         - name: Compile-2
@@ -51,6 +55,9 @@ jobs:
             cpack -G TGZ
             mv /home/runner/work/lab06/lab06/solver_application/just_code.zip art
             mv /home/runner/work/lab06/lab06/solver_application/just_code.tar.gz art
-
+        - name: move1
+          run: |
+            mv /home/runner/work/lab06/lab06/solver_application/just_code.zip art
+            mv /home/runner/work/lab06/lab06/solver_application/just_code.tar.gz art
 
         
