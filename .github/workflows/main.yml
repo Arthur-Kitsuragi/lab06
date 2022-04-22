@@ -53,8 +53,6 @@ jobs:
             make
             cpack -G ZIP
             cpack -G TGZ
-            mv /home/runner/work/lab06/lab06/solver_application/just_code.zip art
-            mv /home/runner/work/lab06/lab06/solver_application/just_code.tar.gz art
         - name: move1
           run: |
             mv /home/runner/work/lab06/lab06/solver_application/just_code.zip art
