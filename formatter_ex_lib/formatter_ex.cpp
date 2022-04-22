@@ -1,5 +1,5 @@
 #include "formatter_ex.h"
-//f
+//fdd
 #include "formatter.h"
 
 std::ostream& formatter(std::ostream& out, const std::string& message)
