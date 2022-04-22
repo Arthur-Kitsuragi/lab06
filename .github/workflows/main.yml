@@ -1,8 +1,11 @@
-name: lab05
+name: lab06
+
 on:
   push:
-    branches:
-      - master
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
 jobs:
   work0:
       runs-on: windows-latest
@@ -16,6 +19,26 @@ jobs:
             cpack -G WIX Release
         - name: move
           run: mv D:/a/lab06/lab06/solver_application/wixxx.msi art
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ github.ref }}
+            release_name: Release ${{ github.ref }}
+            draft: false
+            prerelease: false 
+        - name: Upload release
+          id: upload-release-asset
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: art/wixxx.msi
+            asset_name: wix
+            asset_content_type: application/msi
   work1:
       runs-on: macos-latest
       steps:
@@ -28,6 +51,26 @@ jobs:
             cpack -G DragNDrop
         - name: move
           run: mv /Users/runner/work/lab06/lab06/solver_application/wixxx.dmg art
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ github.ref }}
+            release_name: Release ${{ github.ref }}
+            draft: false
+            prerelease: false 
+        - name: Upload release
+          id: upload-release-asset
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: art/wixxx.dmg
+            asset_name: dmg
+            asset_content_type: application/dmg
         
   work:
       runs-on: ubuntu-latest 
@@ -56,6 +99,24 @@ jobs:
         - name: move1
           run: |
             mv /home/runner/work/lab06/lab06/solver_application/just_code.zip art
-            mv /home/runner/work/lab06/lab06/solver_application/just_code.tar.gz art
-
+            mv /home/runner/work/lab06/lab06/solver_application/just_code.tar.gz art 
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ github.ref }}
+            release_name: Release ${{ github.ref }}
+            draft: false
+            prerelease: false 
+        - name: Upload release
+          id: upload-release-asset
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: art/just_code.tar.gz
+            asset_name: archive_code
         
