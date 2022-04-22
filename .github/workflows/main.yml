@@ -19,26 +19,10 @@ jobs:
             cpack -G WIX Release
         - name: move
           run: mv D:/a/lab06/lab06/solver_application/wixxx.msi art
-        - name: Create Release
-          id: create_release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - uses: actions/upload-artifact@v3
           with:
-            tag_name: ${{ github.ref }}
-            release_name: Release ${{ github.ref }}
-            draft: false
-            prerelease: false 
-        - name: Upload release
-          id: upload-release-asset
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: art/wixxx.msi
-            asset_name: wix
-            asset_content_type: application/msi
+            name: win-art
+            path: art/wixxx.msi
   work1:
       runs-on: macos-latest
       steps:
@@ -51,6 +35,10 @@ jobs:
             cpack -G DragNDrop
         - name: move
           run: mv /Users/runner/work/lab06/lab06/solver_application/wixxx.dmg art
+        - uses: actions/upload-artifact@v3
+          with:
+            name: dmg-art
+            path: art/wixxx.dmg
   work:
       runs-on: ubuntu-latest 
       steps:
@@ -68,6 +56,14 @@ jobs:
           run: |
             mv /home/runner/work/lab06/lab06/solver_application/solvering.rpm art
             mv /home/runner/work/lab06/lab06/solver_application/solvering.deb art
+        - uses: actions/upload-artifact@v3
+          with:
+            name: rpm-art
+            path: art/solvering.rpm
+        - uses: actions/upload-artifact@v3
+          with:
+            name: deb-art
+            path: art/solvering.deb
         - name: Compile-2
           run: |
             cd solver_application
@@ -79,3 +75,131 @@ jobs:
           run: |
             mv /home/runner/work/lab06/lab06/solver_application/just_code.zip art
             mv /home/runner/work/lab06/lab06/solver_application/just_code.tar.gz art 
+        - uses: actions/upload-artifact@v3
+          with:
+            name: zip-art
+            path: art/just_code.zip 
+        - uses: actions/upload-artifact@v3
+          with:
+            name: tar-art
+            path: art/just_code.tar.gz
+  
+  create-release:
+      needs: [work0, work1, work] 
+      
+      runs-on: ubuntu-latest
+
+      steps:
+      
+         - name: Create Release
+           id: create_release
+           uses: actions/create-release@latest
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+           with:
+              tag_name: ${{ github.ref }}
+              release_name: Release ${{ github.ref }}
+              draft: false
+              prerelease: false
+              
+         - name: 'Download artifact linux-deb'
+           uses: actions/download-artifact@v1
+           with:
+              name: 'deb-art'
+              path: ./
+              
+         - name: 'Download artifact linux-rpm'
+           uses: actions/download-artifact@v1
+           with:
+              name: 'rpm-art'
+              path: ./
+              
+         - name: 'Download artifact linux-zip'
+           uses: actions/download-artifact@v1
+           with:
+              name: 'zip-art'
+              path: ./
+              
+         - name: 'Download artifact linux-deb'
+           uses: actions/download-artifact@v1
+           with:
+              name: 'tar-art'
+              path: ./
+              
+         - name: 'Download artifact win'
+           uses: actions/download-artifact@v1
+           with:
+              name: 'win-art'
+              path: ./
+              
+         - name: 'Download artifact mac'
+           uses: actions/download-artifact@v1
+           with:
+              name: 'dmg-art'
+              path: ./
+              
+         - name: Upload-Release-Asset
+           id: upload-release-asset1-deb 
+           uses: actions/upload-release-asset@v1
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} 
+            asset_path: solvering.deb 
+            asset_name: solve.deb
+            asset_content_type: application/deb
+            
+         - name: Upload-Release-Asset
+           id: upload-release-asset1-rpm 
+           uses: actions/upload-release-asset@v1
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} 
+            asset_path: solvering.rpm 
+            asset_name: solve.rpm
+            asset_content_type: application/rpm
+        
+         - name: Upload-Release-Asset
+           id: upload-release-asset2
+           uses: actions/upload-release-asset@v1
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} 
+            asset_path: wixxx.dmg
+            asset_name: solve.dmg
+            asset_content_type: application/dmg
+            
+         - name: Upload-Release-Asset
+           id: upload-release-asset3
+           uses: actions/upload-release-asset@v1
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} 
+            asset_path: wixxx.msi
+            asset_name: solve.exe
+            asset_content_type: application/exe
+          
+         - name: Upload-Release-Asset
+           id: upload-release-asset1-zip
+           uses: actions/upload-release-asset@v1
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} 
+            asset_path: just_code.zip 
+            asset_name: solve.zip
+            asset_content_type: application/zip
+            
+         - name: Upload-Release-Asset
+           id: upload-release-asset1-tar
+           uses: actions/upload-release-asset@v1
+           env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} 
+            asset_path: just_code.tar.gz
+            asset_name: solve.tar.gz
+            asset_content_type: application/tar
